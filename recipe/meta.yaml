@@ -19,6 +19,7 @@ requirements:
   build:
     - cmake >=3.13
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
     - pip
     - python
@@ -41,7 +42,7 @@ test:
     - pip
 
 about:
-  home: https://pypi.org/project/vowpalwabbit/
+  home: https://github.com/VowpalWabbit/vowpal_wabbit
   summary: Vowpal Wabbit Python package
   license: BSD-3-Clause
   license_file: LICENSE
