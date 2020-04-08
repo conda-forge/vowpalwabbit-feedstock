@@ -1,55 +1,54 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "8.7.0" %}
+{% set version = "8.8.1" %}
+
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.post1.tar.gz
-  sha256: de9529660858b380127b2bea335b41a29e8f264551315042300022eb4e6524ea
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 46bddb560759b8d7df5b2b1cf66340102d71d74f83671d48bb572635c90bdc9d
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install -vv ."
-  skip: True  # [not linux]
+  skip: true  # [win]
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
     - cmake >=3.13
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
-    - py-boost
     - pip
     - python
+    - boost
+    - boost-cpp
+    - tox
+    - zlib
   run:
-    - py-boost
     - python
+    - boost
+    - boost-cpp
+    - zlib
 
 test:
   imports:
-    - {{ name }}
-  requires:
-    - numpy
-    - pandas
-    - pytest
-    - scipy
-    - scikit-learn
-  source_files:
-    - python/tests
+    - vowpalwabbit
   commands:
-    - py.test python/tests
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://github.com/VowpalWabbit/vowpal_wabbit
+  summary: Vowpal Wabbit Python package
   license: BSD-3-Clause
-  license_family: BSD
   license_file: LICENSE
-  summary: Fast online machine learning library
-  doc_url: https://github.com/VowpalWabbit/vowpal_wabbit/wiki
-  dev_url: https://github.com/VowpalWabbit/vowpal_wabbit
 
 extra:
   recipe-maintainers:
     - gramhagen
     - peterychang
+    - xhochy
