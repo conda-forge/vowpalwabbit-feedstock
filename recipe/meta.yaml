@@ -9,15 +9,18 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 46bddb560759b8d7df5b2b1cf66340102d71d74f83671d48bb572635c90bdc9d
+  patches:
+    - remove-sse2-from-flags.patch  # [aarch64 or ppc64le or arm64]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
     - cmake >=3.13
+    - make
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
