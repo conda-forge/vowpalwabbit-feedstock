@@ -13,7 +13,7 @@ source:
     - remove-sse2-from-flags.patch  # [aarch64 or ppc64le or arm64]
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
 
