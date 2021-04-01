@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "8.8.1" %}
+{% set version = "8.10.0" %}
 
 
 package:
@@ -8,12 +8,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 46bddb560759b8d7df5b2b1cf66340102d71d74f83671d48bb572635c90bdc9d
+  sha256: 4374b4218725e303cec89e249372c4cc06f27228dbeead8ac25fa3fb182ea369
   patches:
     - remove-sse2-from-flags.patch  # [aarch64 or ppc64le or arm64]
 
 build:
-  number: 4
+  number: 0
   skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
 
