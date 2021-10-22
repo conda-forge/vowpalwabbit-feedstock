@@ -33,6 +33,8 @@ python:
 target_platform:
 - osx-64
 zip_keys:
+- - boost
+  - boost_cpp
 - - c_compiler_version
   - cxx_compiler_version
 zlib:
