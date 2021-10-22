@@ -28,7 +28,6 @@ outputs:
       host:
         - pip
         - python
-        - py-boost
         - boost
         - boost-cpp
         - tox
