@@ -28,12 +28,14 @@ outputs:
       host:
         - pip
         - python
+        - libboost
         - boost
         - boost-cpp
         - tox
         - zlib
       run:
         - python
+        - libboost
         - boost
         - boost-cpp
         - zlib
