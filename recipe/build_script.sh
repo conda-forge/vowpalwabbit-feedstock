@@ -1,1 +1,1 @@
-$PYTHON -m pip install . -vv --cmake-options="-DSTATIC_LINK_VW_JAVA=On;-DPython3_EXECUTABLE=\"$PYTHON\""
+$PYTHON -m pip install . -vv --global-option --cmake-options="-DSTATIC_LINK_VW_JAVA=On;-DPython3_EXECUTABLE=\"$PYTHON\""
