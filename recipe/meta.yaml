@@ -1,7 +1,6 @@
 {% set name = "vowpalwabbit" %}
 {% set version = "8.11.0" %}
 
-
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -9,15 +8,15 @@ package:
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz  
     sha256: b828a23c61e7d6d232cec700d0e5ec750b8106a0e60fe8f2108cb76bd34076f1
-#   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
-#     sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
-#     folder: ext_libs/fmt
-#   - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
-#     sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
-#     folder: ext_libs/rapidjson
-#   - url: https://github.com/gabime/spdlog/archive/de0dbfa.tar.gz
-#     sha256: cdec95055813c8b7cebe9b417bb841ccca95c330d200ac32cc3b3561a305ad38
-#     folder: ext_libs/spdlog
+  - url: https://github.com/fmtlib/fmt/archive/refs/tags/8.0.1.tar.gz
+    sha256: b06ca3130158c625848f3fb7418f235155a4d389b2abc3a6245fb01cb0eb1e01
+    folder: ext_libs/fmt
+  - url: https://github.com/Tencent/rapidjson/archive/refs/tags/v1.1.0.tar.gz
+    sha256: bf7ced29704a1e696fbccf2a2b4ea068e7774fa37f6d7dd4039d0787f8bed98e
+    folder: ext_libs/rapidjson
+  - url: https://github.com/gabime/spdlog/archive/refs/tags/v1.9.2.tar.gz
+    sha256: 6fff9215f5cb81760be4cc16d033526d1080427d236e86d70bb02994f85e3d38
+    folder: ext_libs/spdlog
 
 build:
   number: 1
@@ -32,9 +31,9 @@ requirements:
     - make
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - fmt
-    - rapidjson
-    - spdlog
+#     - fmt
+#     - rapidjson
+#     - spdlog
   host:
     - pip
     - python
