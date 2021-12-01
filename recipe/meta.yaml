@@ -31,9 +31,6 @@ requirements:
     - make
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - fmt
-    - rapidjson
-    - spdlog
   host:
     - pip
     - python
