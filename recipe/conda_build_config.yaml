@@ -1,7 +1,6 @@
-# texlive doesn't compile with clang=11 due to the use of multiple function definitions
 c_compiler_version:    # [osx]
 - '11'                 # [osx]
 cxx_compiler_version:  # [osx]
 - '11'                 # [osx]
-macos_machine:         # [osx]
- - x86_64-apple-darwin20.0.0  # [osx]
+macos_machine:         # [osx and 64]
+ - x86_64-apple-darwin20.0.0  # [osx and 64]
