@@ -1,7 +1,7 @@
-CONDA_BUILD_SYSROOT:
-- /opt/MacOSX11.0.sdk
 MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
+- '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
 boost:
 - 1.74.0
 boost_cpp:
