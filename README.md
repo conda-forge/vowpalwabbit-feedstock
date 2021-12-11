@@ -290,6 +290,7 @@ Feedstock Maintainers
 =====================
 
 * [@gramhagen](https://github.com/gramhagen/)
+* [@ngam](https://github.com/ngam/)
 * [@peterychang](https://github.com/peterychang/)
 * [@xhochy](https://github.com/xhochy/)
 
