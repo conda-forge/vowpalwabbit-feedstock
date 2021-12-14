@@ -9,6 +9,8 @@ package:
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz  
     sha256: b828a23c61e7d6d232cec700d0e5ec750b8106a0e60fe8f2108cb76bd34076f1
+    patches:
+      - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
     sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
     folder: ext_libs/fmt
@@ -20,12 +22,14 @@ source:
     folder: ext_libs/spdlog
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cmake >=3.13
     - make
     - {{ compiler('c') }}
@@ -62,3 +66,4 @@ extra:
     - gramhagen
     - peterychang
     - xhochy
+    - ngam
