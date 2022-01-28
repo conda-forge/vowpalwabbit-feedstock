@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "8.11.0" %}
+{% set version = "9.0.0" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz  
-    sha256: b828a23c61e7d6d232cec700d0e5ec750b8106a0e60fe8f2108cb76bd34076f1
+    sha256: e5c8ed20c51900b3cc57650c53753ee12291e061e1d78540c240dc59f7568666
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
