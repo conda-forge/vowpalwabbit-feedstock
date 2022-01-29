@@ -11,21 +11,16 @@ source:
     sha256: e5c8ed20c51900b3cc57650c53753ee12291e061e1d78540c240dc59f7568666
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-  - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
-    sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
-    folder: ext_libs/fmt
-  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
-    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
-    folder: ext_libs/rapidjson
-  - url: https://github.com/gabime/spdlog/archive/de0dbfa.tar.gz
-    sha256: cdec95055813c8b7cebe9b417bb841ccca95c330d200ac32cc3b3561a305ad38
-    folder: ext_libs/spdlog
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   skip: true  # [python_impl == 'pypy']
-  script: {{ PYTHON }} -m pip install . -vv
+  script: 
+    - cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_PYTHON=On -DBUILD_TESTS=Off -DBoost_NO_BOOST_CMAKE=ON -DPY_VERSION=${CONDA_PY:0:1}.${CONDA_PY:1:5} -DBUILD_FLATBUFFERS=ON -DFMT_SYS_DEP=ON -DSPDLOG_SYS_DEP=ON -DRAPIDJSON_SYS_DEP=ON -DCMAKE_INSTALL_LIBDIR=$PREFIX/lib ${CMAKE_ARGS}
+    - cmake --build build --parallel --target vw-bin spanning_tree pylibvw
+    - python test/run_tests.py --fuzzy_compare
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -42,11 +37,18 @@ requirements:
     - boost-cpp
     - tox
     - zlib
+    - fmt
+    - rapidjson
+    - spdlog
+    - flatbuffers
   run:
     - python
     - boost
     - boost-cpp
     - zlib
+    - spdlog
+    - fmt
+    - rapidjson
 
 test:
   imports:
