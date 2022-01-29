@@ -36,7 +36,7 @@ build:
      - EXT_NAME_DIRTY="$(python -m sysconfig | grep "SO =")"
      - EXT_NAME_CLEAN=${EXT_NAME_DIRTY:7:100}
      - EXT_NAME=${EXT_NAME_CLEAN%?}
-     - ln -s ${SP_DIR}/pylibvw.so ${SP_DIR}/pylibvw.${EXT_NAME}
+     - ln -s ${SP_DIR}/pylibvw.so ${SP_DIR}/pylibvw.${EXT_NAME}  # [python_impl == 'pypy']
      
 
 requirements:
