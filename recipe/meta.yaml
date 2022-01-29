@@ -11,7 +11,7 @@ source:
     sha256: e5c8ed20c51900b3cc57650c53753ee12291e061e1d78540c240dc59f7568666
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-      - 0001-extension-setting.patch  # [python_impl == 'pypy']
+      # - 0001-extension-setting.patch  # [python_impl == 'pypy']
   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
     sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
     folder: ext_libs/fmt
@@ -26,7 +26,12 @@ build:
   number: 3
   skip: true  # [win]
   # skip: true  # [python_impl == 'pypy']
-  script: {{ PYTHON }} -m pip install . -vv
+  script: 
+     - {{ PYTHON }} -m pip install . -vv
+     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-x86_64-linux-gnu.so  # [python_impl == 'pypy' and (linux and x86_64)]
+     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-aarch64-linux-gnu.so  # [python_impl == 'pypy' and (linux and aarch64)]
+     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-ppc64le-linux-gnu.so  # [python_impl == 'pypy' and (linux and ppc64le)]
+     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-darwin.so  # [python_impl == 'pypy' and (osx and x86_64)]
 
 requirements:
   build:
