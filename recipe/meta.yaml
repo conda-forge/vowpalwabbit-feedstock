@@ -29,10 +29,15 @@ build:
      # these symlink are needed because pypy expects a specific .so
      # upstream hardcodes the .so extension
      # see https://github.com/conda-forge/pypy-meta-feedstock/issues/21
-     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-x86_64-linux-gnu.so  # [python_impl == 'pypy' and (linux and x86_64)]
-     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-aarch64-linux-gnu.so  # [python_impl == 'pypy' and (linux and aarch64)]
-     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-ppc64le-linux-gnu.so  # [python_impl == 'pypy' and (linux and ppc64le)]
-     - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-darwin.so  # [python_impl == 'pypy' and (osx and x86_64)]
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-x86_64-linux-gnu.so  # [python_impl == 'pypy' and (linux and x86_64)]
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-aarch64-linux-gnu.so  # [python_impl == 'pypy' and (linux and aarch64)]
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-ppc64le-linux-gnu.so  # [python_impl == 'pypy' and (linux and ppc64le)]
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-darwin.so  # [python_impl == 'pypy' and (osx and x86_64)]
+     - EXT_NAME_DIRTY="$(python -m sysconfig | grep "SO =")"
+     - EXT_NAME_CLEAN=${EXT_NAME_DIRTY:7:100}
+     - EXT_NAME=${EXT_NAME_CLEAN%?}
+     - ln -s ${SP_DIR}/pylibvw.so ${SP_DIR}/pylibvw.${EXT_NAME}
+     
 
 requirements:
   build:
