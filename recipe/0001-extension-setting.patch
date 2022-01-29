@@ -16,7 +16,7 @@ index 7e8884ecd..4b174a766 100644
    target_compile_definitions(pylibvw PUBLIC BOOST_PYTHON_STATIC_LIB)
    # OSX builds a .dylib and then attempts to find a .so. Just build a .so file and things work
 -  set_target_properties(pylibvw PROPERTIES SUFFIX ".so")
-+  # set_target_properties(pylibvw PROPERTIES SUFFIX ".so")
++  set_target_properties(pylibvw PROPERTIES SUFFIX ".pypy37-pp73-$OSTYPE.so")
  else()
    # Force Windows to build with a .pyd extension
    set_target_properties(pylibvw PROPERTIES SUFFIX ".pyd")
