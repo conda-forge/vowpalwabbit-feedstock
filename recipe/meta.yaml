@@ -73,7 +73,7 @@ test:
     - test
   commands:
     - pip check
-    - python test/run_tests.py --fuzzy_compare
+    - python test/run_tests.py --fuzzy_compare --ignore_dirty --vw_bin_path=$CONDA_PREFIX/bin --spanning_tree_bin_path=$CONDA_PREFIX/bin --to_flatbuff_path=$CONDA_PREFIX
   requires:
     - pip
     - git
