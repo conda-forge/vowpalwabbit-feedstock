@@ -23,7 +23,7 @@ index 8604d465e..2fe05ee55 100644
 +                "-DBUILD_FLATBUFFERS=On",
 +                "-DSTATIC_LINK_VW=Off",
 +                "-DSTATIC_LINK_VW_JAVA=Off", "-DBUILD_JAVA=Off",
-+                "-DVW_INSTALL=On", "-DBUILD_TESTS=On", " {}".format(os.os.environ["CMAKE_ARGS"])
++                "-DVW_INSTALL=On", "-DBUILD_TESTS=On", " {}".format(os.environ["CMAKE_ARGS"])
 +            ]
 +
          # example of build args
