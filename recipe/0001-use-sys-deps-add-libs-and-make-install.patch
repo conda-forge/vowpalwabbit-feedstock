@@ -1,0 +1,51 @@
+From 607b38d5967495e1c42b0a7bf9859d4e677c5023 Mon Sep 17 00:00:00 2001
+From: ngam <67342040+ngam@users.noreply.github.com>
+Date: Sun, 30 Jan 2022 14:08:20 -0500
+Subject: [PATCH 1/2] use sys deps, add libs, and make install
+
+---
+ setup.py | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 8604d465e..2fe05ee55 100644
+--- a/setup.py
++++ b/setup.py
+@@ -125,6 +125,17 @@ class BuildPyLibVWBindingsModule(_build_ext):
+             )
+             cmake_args.append("-DPython_INCLUDE_DIR={}".format(get_python_inc()))
+ 
++            cmake_args += [
++                "-DRAPIDJSON_SYS_DEP=On",
++                "-DFMT_SYS_DEP=On",
++                "-DSPDLOG_SYS_DEP=On",
++                "-DCMAKE_INSTALL_PREFIX=$PREFIX",
++                "-DBUILD_FLATBUFFERS=On",
++                "-DSTATIC_LINK_VW=Off",
++                "-DSTATIC_LINK_VW_JAVA=Off",
++                "-DVW_INSTALL=On",
++            ]
++
+         # example of build args
+         build_args = ["--config", config]
+ 
+@@ -157,7 +168,7 @@ class BuildPyLibVWBindingsModule(_build_ext):
+                 "--",
+                 "-j{}".format(multiprocessing.cpu_count()),
+                 # Build the pylibvw target
+-                "pylibvw",
++                "pylibvw", "vw-bin", "spanning_tree",
+             ]
+ 
+         if cmake_generator is not None:
+@@ -171,6 +182,7 @@ class BuildPyLibVWBindingsModule(_build_ext):
+         self.spawn(["cmake"] + cmake_args + [str(here)])
+         if not self.dry_run:
+             self.spawn(["cmake", "--build", "."] + build_args)
++            self.spawn(["make", "install"])
+         os.chdir(str(here))
+ 
+ 
+-- 
+2.34.1
+
