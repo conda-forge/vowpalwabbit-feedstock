@@ -72,7 +72,7 @@ test:
     - test
   commands:
     - pip check
-    - python test/run_tests.py --fuzzy_compare
+    - python test/run_tests.py --fuzzy_compare --ignore_dirty
   requires:
     - pip
     - git
