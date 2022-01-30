@@ -68,8 +68,11 @@ requirements:
 test:
   imports:
     - vowpalwabbit
+  source_files:
+    - test
   commands:
     - pip check
+    - python run_tests.py --fuzzy_compare
   requires:
     - pip
 
