@@ -28,6 +28,7 @@ build:
   number: 4
   skip: true  # [win]
   script: 
+     - cp $BUILD_PREFIX/share/gnuconfig/config.* .
      - {{ PYTHON }} -m pip install . -vv
      # these symlink are needed because pypy expects a specific .so
      # upstream hardcodes the .so extension
@@ -45,6 +46,7 @@ requirements:
     - make
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - gnuconfig   # [unix]
   host:
     - pip
     - python
