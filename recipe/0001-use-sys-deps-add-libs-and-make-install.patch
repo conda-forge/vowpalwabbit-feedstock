@@ -42,7 +42,7 @@ index 8604d465e..2fe05ee55 100644
          self.spawn(["cmake"] + cmake_args + [str(here)])
          if not self.dry_run:
              self.spawn(["cmake", "--build", "."] + build_args)
-+            self.spawn(["make", "install"])
++            self.spawn(["make", "install", "-j{}".format(multiprocessing.cpu_count())])
          os.chdir(str(here))
  
  
