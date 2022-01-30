@@ -11,8 +11,8 @@ source:
     sha256: e5c8ed20c51900b3cc57650c53753ee12291e061e1d78540c240dc59f7568666
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-      - 0001-sysdeps-and-libs.patch
-      - 0002-remove-numbered-versions-in-ext_libs.patch  
+      - 0001-use-sys-deps-add-libs-and-make-install.patch
+      - 0002-remove-numbered-version-in-ext_libs.patch
   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
     sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
     folder: ext_libs/fmt
@@ -35,9 +35,7 @@ build:
      - EXT_NAME_CLEAN=${EXT_NAME_DIRTY:15:200}
      - EXT_NAME=${EXT_NAME_CLEAN%?}
      - ln -s ${SP_DIR}/pylibvw.so ${SP_DIR}/pylibvw${EXT_NAME}  # [python_impl == 'pypy']
-     - rm -rf build; mkdir build; cd build
-     - cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DRAPIDJSON_SYS_DEP=On -DFMT_SYS_DEP=On -DSPDLOG_SYS_DEP=On -DSTATIC_LINK_VW=Off -DSTATIC_LINK_VW_JAVA=Off
-     - make install -j ${CPU_COUNT}
+     - make install
 
 requirements:
   build:
