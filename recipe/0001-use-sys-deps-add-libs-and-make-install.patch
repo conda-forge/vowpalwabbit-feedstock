@@ -19,7 +19,7 @@ index 8604d465e..2fe05ee55 100644
 +                "-DRAPIDJSON_SYS_DEP=On",
 +                "-DFMT_SYS_DEP=On",
 +                "-DSPDLOG_SYS_DEP=On",
-+                "-DCMAKE_INSTALL_PREFIX={}".format(os.environ(["PREFIX"])),
++                "-DCMAKE_INSTALL_PREFIX={}".format(os.environ["PREFIX"]),
 +                "-DBUILD_FLATBUFFERS=On",
 +                "-DSTATIC_LINK_VW=Off",
 +                "-DSTATIC_LINK_VW_JAVA=Off", "-DBUILD_JAVA=On",
