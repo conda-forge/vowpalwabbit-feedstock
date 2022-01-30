@@ -75,6 +75,7 @@ test:
     - python test/run_tests.py --fuzzy_compare
   requires:
     - pip
+    - git
 
 about:
   home: https://github.com/VowpalWabbit/vowpal_wabbit
