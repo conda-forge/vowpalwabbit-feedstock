@@ -20,10 +20,10 @@ index 8604d465e..2fe05ee55 100644
 +                "-DFMT_SYS_DEP=On",
 +                "-DSPDLOG_SYS_DEP=On",
 +                "-DCMAKE_INSTALL_PREFIX={}".format(os.environ["PREFIX"]),
-+                "-DBUILD_FLATBUFFERS=On",
++                "-DBUILD_FLATBUFFERS=Off",
 +                "-DSTATIC_LINK_VW=Off",
 +                "-DSTATIC_LINK_VW_JAVA=Off", "-DBUILD_JAVA=Off",
-+                "-DVW_INSTALL=On", "-DBUILD_TESTS=On", os.environ["CMAKE_ARGS"],
++                "-DVW_INSTALL=On", "-DBUILD_TESTS=On",
 +            ]
 +
          # example of build args

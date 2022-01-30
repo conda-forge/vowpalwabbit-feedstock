@@ -54,7 +54,6 @@ requirements:
     - boost-cpp
     - tox
     - zlib
-    - flatbuffers
     - fmt
     - rapidjson
     - spdlog
@@ -63,7 +62,6 @@ requirements:
     - boost
     - boost-cpp
     - zlib
-    - flatbuffers
     - fmt
     - rapidjson
     - spdlog
