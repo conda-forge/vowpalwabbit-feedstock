@@ -1,7 +1,7 @@
 From dd41f0f941b07f017e9b980c17907355137d21d2 Mon Sep 17 00:00:00 2001
 From: ngam <67342040+ngam@users.noreply.github.com>
 Date: Sun, 30 Jan 2022 13:07:23 -0500
-Subject: [PATCH] sysdeps and libs
+Subject: [PATCH 1/2] sysdeps and libs
 
 ---
  setup.py | 13 ++++++++++++-
