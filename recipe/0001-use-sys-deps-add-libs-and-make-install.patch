@@ -22,7 +22,7 @@ index 8604d465e..2fe05ee55 100644
 +                "-DCMAKE_INSTALL_PREFIX={}".format(os.environ["PREFIX"]),
 +                "-DBUILD_FLATBUFFERS=On",
 +                "-DSTATIC_LINK_VW=Off",
-+                "-DSTATIC_LINK_VW_JAVA=Off", "--DBUILD_JAVA=Off",
++                "-DSTATIC_LINK_VW_JAVA=Off", "-DBUILD_JAVA=Off",
 +                "-DVW_INSTALL=On", "-DBUILD_TESTS=On", " {}".format(os.os.environ["CMAKE_ARGS"])
 +            ]
 +
