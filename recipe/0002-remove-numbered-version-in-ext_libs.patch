@@ -1,7 +1,7 @@
 From 23c3363cb313d6eace2cb1e21aa2f0a01d2ddcf7 Mon Sep 17 00:00:00 2001
 From: ngam <67342040+ngam@users.noreply.github.com>
 Date: Sun, 30 Jan 2022 14:08:51 -0500
-Subject: [PATCH 2/2] remove numbered version in ext_libs
+Subject: [PATCH 2/3] remove numbered version in ext_libs
 
 ---
  ext_libs/ext_libs.cmake | 6 +++---
