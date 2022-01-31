@@ -20,7 +20,7 @@ index 8604d465e..ecbb31604 100644
 +                "-DFMT_SYS_DEP=On",
 +                "-DSPDLOG_SYS_DEP=On",
 +                "-DCMAKE_INSTALL_PREFIX={}".format(os.environ["PREFIX"]),
-+                "-DBUILD_FLATBUFFERS=Off",
++                "-DBUILD_FLATBUFFERS=On",
 +                "-DSTATIC_LINK_VW=Off",
 +                "-DSTATIC_LINK_VW_JAVA=Off",
 +                "-DBUILD_JAVA=Off",
