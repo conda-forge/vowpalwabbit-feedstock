@@ -54,6 +54,7 @@ requirements:
     - boost-cpp
     - tox
     - zlib
+    - flatbuffers
     - fmt
     - rapidjson
     - spdlog
@@ -62,6 +63,7 @@ requirements:
     - boost
     - boost-cpp
     - zlib
+    - flatbuffers
     - fmt
     - rapidjson
     - spdlog
@@ -74,7 +76,7 @@ test:
   commands:
     - pip check
     # --skip_test 220 152 61 due to netcat issues
-    - python test/run_tests.py --fuzzy_compare --ignore_dirty --vw_bin_path=$CONDA_PREFIX/bin/vw --spanning_tree_bin_path=$CONDA_PREFIX/bin/spanning_tree --skip_test 220 152 61
+    - python test/run_tests.py --fuzzy_compare --ignore_dirty --vw_bin_path=$CONDA_PREFIX/bin/vw --spanning_tree_bin_path=$CONDA_PREFIX/bin/spanning_tree --to_flatbuff_path=$CONDA_PREFIX/bin/flatc --skip_test 220 152 61
   requires:
     - pip
     - git
