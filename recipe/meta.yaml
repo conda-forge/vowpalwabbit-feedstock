@@ -65,8 +65,8 @@ requirements:
     - boost-cpp
     - zlib
     - flatbuffers  # [target_platform != osx-arm64]
-    - fmt
-    - rapidjson  # [target_platform != osx-arm64]
+    - fmt  #  [target_platform != osx-arm64]
+    - rapidjson 
     - spdlog  # [target_platform != osx-arm64]
 
 test:
