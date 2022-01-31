@@ -10,8 +10,9 @@ source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz  
     sha256: e5c8ed20c51900b3cc57650c53753ee12291e061e1d78540c240dc59f7568666
     patches:
-      - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-      - 0001-use-sys-deps-add-libs-and-make-install.patch
+      - turn_off_sse2_flags.diff  # [target_platform == osx-arm64]
+      - 0001-use-sys-deps-add-libs-and-make-install.patch  # [target_platform != osx-arm64]
+      - 0001-use-sys-deps-add-libs-and-make-install-osxarm64.patch  # [target_platform == osx-arm64]
       - 0002-remove-numbered-version-in-ext_libs.patch
       - 0003-fix-test-paths.patch
   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
@@ -54,19 +55,19 @@ requirements:
     - boost-cpp
     - tox
     - zlib
-    - flatbuffers
-    - fmt
+    - flatbuffers  # [target_platform != osx-arm64]
+    - fmt  # [target_platform != osx-arm64]
     - rapidjson
-    - spdlog
+    - spdlog  # [target_platform != osx-arm64]
   run:
     - python
     - boost
     - boost-cpp
     - zlib
-    - flatbuffers
+    - flatbuffers  # [target_platform != osx-arm64]
     - fmt
-    - rapidjson
-    - spdlog
+    - rapidjson  # [target_platform != osx-arm64]
+    - spdlog  # [target_platform != osx-arm64]
 
 test:
   imports:

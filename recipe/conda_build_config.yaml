@@ -1,4 +1,4 @@
-fmt:
-  - '7'
-spdlog:
-  - '1.8'
+fmt:  # [target_platform != osx-arm64]
+  - '7'  # [target_platform != osx-arm64]
+spdlog:  # [target_platform != osx-arm64]
+  - '1.8'  # [target_platform != osx-arm64]
