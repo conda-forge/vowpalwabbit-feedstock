@@ -1,14 +1,14 @@
 {% set name = "vowpalwabbit" %}
 {% set version = "9.0.0" %}
-
+{% set commit = "ce5d82b" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz  
-    sha256: e5c8ed20c51900b3cc57650c53753ee12291e061e1d78540c240dc59f7568666
+  - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/{{ commit }}.tar.gz  
+    sha256: f8f3db6eb0e57db5b44fe2b43b82b5cc41b5ad014cbd5611faee390266536405
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
@@ -22,17 +22,10 @@ source:
     folder: ext_libs/spdlog
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win]
   script: 
      - {{ PYTHON }} -m pip install . -vv
-     # these symlink are needed because pypy expects a specific .so
-     # upstream hardcodes the .so extension
-     # see https://github.com/conda-forge/pypy-meta-feedstock/issues/21
-#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-x86_64-linux-gnu.so  # [python_impl == 'pypy' and (linux and x86_64)]
-#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-aarch64-linux-gnu.so  # [python_impl == 'pypy' and (linux and aarch64)]
-#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-ppc64le-linux-gnu.so  # [python_impl == 'pypy' and (linux and ppc64le)]
-#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-darwin.so  # [python_impl == 'pypy' and (osx and x86_64)]
      - EXT_NAME_DIRTY="$(python -m sysconfig | grep "EXT_SUFFIX =")"
      - EXT_NAME_CLEAN=${EXT_NAME_DIRTY:15:200}
      - EXT_NAME=${EXT_NAME_CLEAN%?}
