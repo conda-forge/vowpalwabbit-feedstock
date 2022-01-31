@@ -1,31 +1,39 @@
-From 0249af51bfba4c2042f6b70d1d7a74e3fafb70ec Mon Sep 17 00:00:00 2001
+From 4bd782b700fc643ea1902eed7d38b8f8eddc5a13 Mon Sep 17 00:00:00 2001
 From: ngam <67342040+ngam@users.noreply.github.com>
-Date: Sun, 30 Jan 2022 17:14:11 -0500
+Date: Sun, 30 Jan 2022 22:44:58 -0500
 Subject: [PATCH 3/3] fix test paths
 
 ---
- test/run_tests.py | 4 ++++
- 1 file changed, 4 insertions(+)
+ test/run_tests.py | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
 diff --git a/test/run_tests.py b/test/run_tests.py
-index a1574184e..3b8e6cf72 100644
+index a1574184e..4f8145b04 100644
 --- a/test/run_tests.py
 +++ b/test/run_tests.py
-@@ -518,6 +518,8 @@ def find_spanning_tree_binary(
+@@ -518,6 +518,12 @@ def find_spanning_tree_binary(
      def is_spanning_tree_binary(file: Path) -> bool:
          return file.name == "spanning_tree"
  
-+    user_supplied_bin_path = Path(user_supplied_bin_path)
++    user_supplied_bin_path = (
++        Path(user_supplied_bin_path)
++        if user_supplied_bin_path is not None
++        else None
++    )
 +
      return find_or_use_user_supplied_path(
          test_base_ref_dir=test_base_ref_dir,
          user_supplied_bin_path=user_supplied_bin_path,
-@@ -536,6 +538,8 @@ def find_to_flatbuf_binary(
+@@ -536,6 +542,12 @@ def find_to_flatbuf_binary(
      def is_to_flatbuff_binary(file: Path) -> bool:
          return file.name == "to_flatbuff"
  
-+    user_supplied_bin_path = Path(user_supplied_bin_path)
-+
++    user_supplied_bin_path = (
++        Path(user_supplied_bin_path)
++        if user_supplied_bin_path is not None
++        else None
++    )
++    
      return find_or_use_user_supplied_path(
          test_base_ref_dir=test_base_ref_dir,
          user_supplied_bin_path=user_supplied_bin_path,

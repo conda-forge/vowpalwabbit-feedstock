@@ -1,17 +1,17 @@
-From 607b38d5967495e1c42b0a7bf9859d4e677c5023 Mon Sep 17 00:00:00 2001
+From 79f522daa355958adaebb6d4dea14b8c00219119 Mon Sep 17 00:00:00 2001
 From: ngam <67342040+ngam@users.noreply.github.com>
-Date: Sun, 30 Jan 2022 14:08:20 -0500
+Date: Sun, 30 Jan 2022 22:42:44 -0500
 Subject: [PATCH 1/3] use sys deps, add libs, and make install
 
 ---
- setup.py | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ setup.py | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 8604d465e..2fe05ee55 100644
+index 8604d465e..ecbb31604 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -125,6 +125,17 @@ class BuildPyLibVWBindingsModule(_build_ext):
+@@ -125,6 +125,19 @@ class BuildPyLibVWBindingsModule(_build_ext):
              )
              cmake_args.append("-DPython_INCLUDE_DIR={}".format(get_python_inc()))
  
@@ -22,14 +22,16 @@ index 8604d465e..2fe05ee55 100644
 +                "-DCMAKE_INSTALL_PREFIX={}".format(os.environ["PREFIX"]),
 +                "-DBUILD_FLATBUFFERS=Off",
 +                "-DSTATIC_LINK_VW=Off",
-+                "-DSTATIC_LINK_VW_JAVA=Off", "-DBUILD_JAVA=Off",
-+                "-DVW_INSTALL=On", "-DBUILD_TESTS=On", "{}".format(os.environ["CONDA_PREFIX"]),
++                "-DSTATIC_LINK_VW_JAVA=Off",
++                "-DBUILD_JAVA=Off",
++                "-DVW_INSTALL=On",
++                "-DBUILD_TESTS=On",
 +            ]
 +
          # example of build args
          build_args = ["--config", config]
  
-@@ -157,7 +168,7 @@ class BuildPyLibVWBindingsModule(_build_ext):
+@@ -157,7 +170,7 @@ class BuildPyLibVWBindingsModule(_build_ext):
                  "--",
                  "-j{}".format(multiprocessing.cpu_count()),
                  # Build the pylibvw target
@@ -38,10 +40,12 @@ index 8604d465e..2fe05ee55 100644
              ]
  
          if cmake_generator is not None:
-@@ -171,6 +182,7 @@ class BuildPyLibVWBindingsModule(_build_ext):
+@@ -170,7 +183,8 @@ class BuildPyLibVWBindingsModule(_build_ext):
+         os.chdir(str(self.build_temp))
          self.spawn(["cmake"] + cmake_args + [str(here)])
          if not self.dry_run:
-             self.spawn(["cmake", "--build", "."] + build_args)
+-            self.spawn(["cmake", "--build", "."] + build_args)
++            self.spawn(["cmake", "--build", ".", "${CMAKE_ARGS}"] + build_args)
 +            self.spawn(["make", "install", "-j{}".format(multiprocessing.cpu_count())])
          os.chdir(str(here))
  
