@@ -1,6 +1,6 @@
 {% set name = "vowpalwabbit" %}
 {% set version = "9.0.0" %}
-{% set commit = "56ca658" %}
+{% set commit = "2c2899e" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/{{ commit }}.tar.gz  
-    sha256: 417b54951c75e3c7f38c88eab33dcbfb4125d5a4d183d0f1c766c921ab488279
+    sha256: 463164cf19f0bbf19d4ff8985004f1107798afd00577d3f3d0993b89a9403a24
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
@@ -27,10 +27,6 @@ build:
   string: dev_{{ commit }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   script: 
      - {{ PYTHON }} -m pip install . -vv
-     - EXT_NAME_DIRTY="$(python -m sysconfig | grep "EXT_SUFFIX =")"
-     - EXT_NAME_CLEAN=${EXT_NAME_DIRTY:15:200}
-     - EXT_NAME=${EXT_NAME_CLEAN%?}
-     # - ln -s ${SP_DIR}/pylibvw.so ${SP_DIR}/pylibvw${EXT_NAME}  # [python_impl == 'pypy']
      
 
 requirements:
@@ -50,9 +46,6 @@ requirements:
     - zlib
   run:
     - python
-    - boost
-    - boost-cpp
-    - zlib
 
 test:
   imports:
