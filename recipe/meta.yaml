@@ -1,6 +1,6 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.0.0" %}
-{% set commit = "2c2899e" %}
+{% set version = "9.0.1" %}
+{% set commit = "57e8ff2" %}
 
 package:
   name: {{ name|lower }}
@@ -8,18 +8,18 @@ package:
 
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/{{ commit }}.tar.gz  
-    sha256: 463164cf19f0bbf19d4ff8985004f1107798afd00577d3f3d0993b89a9403a24
+    sha256: a8fa15cd8014165d358ab7e8332397f319dba53125f82f670747d537cfde6658
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-  - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
-    sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
-    folder: ext_libs/fmt
-  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
-    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
-    folder: ext_libs/rapidjson
-  - url: https://github.com/gabime/spdlog/archive/de0dbfa.tar.gz
-    sha256: cdec95055813c8b7cebe9b417bb841ccca95c330d200ac32cc3b3561a305ad38
-    folder: ext_libs/spdlog
+#   - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
+#     sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
+#     folder: ext_libs/fmt
+#   - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
+#     sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
+#     folder: ext_libs/rapidjson
+#   - url: https://github.com/gabime/spdlog/archive/de0dbfa.tar.gz
+#     sha256: cdec95055813c8b7cebe9b417bb841ccca95c330d200ac32cc3b3561a305ad38
+#     folder: ext_libs/spdlog
 
 build:
   number: 0
