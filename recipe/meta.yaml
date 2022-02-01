@@ -25,14 +25,32 @@ build:
   number: 0
   skip: true  # [win]
   string: dev_{{ commit }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
-  script: 
-     - {{ PYTHON }} -m pip install . -vv
-     
+  script:
+     - cp $BUILD_PREFIX/share/gnuconfig/config.* .
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DRAPIDJSON_SYS_DEP=On"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DFMT_SYS_DEP=On"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DSPDLOG_SYS_DEP=On"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DBUILD_FLATBUFFERS=On"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DVW_INSTALL=On"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DBUILD_TESTS=Off"
+     - export CMAKE_ARGS_EXTRA="$CMAKE_ARGS_EXTRA -DCMAKE_INSTALL_PREFIX=${PREFIX}"
+     - sed -i.bak '/\"--build\"/a\ \ \ \ \ \ \ \ \ \ \ \ \self.spawn(["make", "install", "-j{}".format(multiprocessing.cpu_count())])' setup.py
+     - sed -i.bak 's/\"pylibvw\"\]/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\]/g' setup.py
+     - sed -i.bak 's/\"pylibvw\"\,/ \"pylibvw\"\, \"vw-bin\"\, \"spanning_tree\"\,/g' setup.py
+     - export CMAKE_ARGS_IN=$(echo $CMAKE_ARGS_EXTRA | sed 's/ /;/g')
+     - {{ PYTHON }} setup.py --cmake-options=$CMAKE_ARGS_IN install     
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - flatbuffers                            # [build_platform != target_platform]
+    - rapidjson                              # [build_platform != target_platform]
+    - fmt                                    # [build_platform != target_platform]
+    - spdlog                                 # [build_platform != target_platform]
+    - zlib                                   # [build_platform != target_platform]
     - cmake >=3.13
     - make
     - {{ compiler('c') }}
@@ -44,18 +62,28 @@ requirements:
     - boost-cpp
     - tox
     - zlib
+    - flatbuffers
+    - rapidjson
+    - fmt
+    - spdlog
   run:
     - python
     - boost
     - boost-cpp
+    - fmt
+    - zlib
 
 test:
   imports:
     - vowpalwabbit
+  source_files:
+    - test
   commands:
     - pip check
+    - python test/run_tests.py --fuzzy_compare --ignore_dirty --vw_bin_path=$CONDA_PREFIX/bin/vw --spanning_tree_bin_path=$CONDA_PREFIX/bin/spanning_tree --to_flatbuff_path=$CONDA_PREFIX/bin/flatc --skip_test 220 152 61 --epsilon 1e-2
   requires:
     - pip
+    - git
 
 about:
   home: https://github.com/VowpalWabbit/vowpal_wabbit
