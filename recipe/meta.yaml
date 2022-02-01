@@ -46,6 +46,8 @@ requirements:
     - zlib
   run:
     - python
+    - boost
+    - boost-cpp
 
 test:
   imports:
