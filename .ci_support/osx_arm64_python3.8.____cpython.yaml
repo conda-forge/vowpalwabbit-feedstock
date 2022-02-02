@@ -16,6 +16,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '11'
+fmt:
+- '8'
 macos_machine:
 - arm64-apple-darwin20.0.0
 pin_run_as_build:
@@ -30,14 +32,12 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.8.* *_cpython
-python_impl:
-- cpython
+spdlog:
+- '1.9'
 target_platform:
 - osx-arm64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - python
-  - python_impl
 zlib:
 - '1.2'
