@@ -24,7 +24,13 @@ build:
   number: 0
   skip: true  # [win]
   script:
-    - {{ PYTHON }} -m pip install . -vv
+    - mkdir build; cd build
+    - cmake .. -DRAPIDJSON_SYS_DEP=ON -DFMT_SYS_DEP=ON -DSPDLOG_SYS_DEP=ON -DBUILD_FLATBUFFERS=Off -DBUILD_PYTHON=On -DPY_VERSION="${CONDA_PY:0:1}.${CONDA_PY:1:2}" -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_TESTS=Off -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=$SP_DIR
+    - cmake --build . -j{CPU_COUNT}
+    - cmake --install .
+    - cd ..
+    - sed -i.bak '/\"build\_ext\"/d' setup.py
+    - {{ PYTHON }} setup.py install
 
 requirements:
   build:
@@ -41,11 +47,16 @@ requirements:
     - boost-cpp
     - tox
     - zlib
+    # - flatbuffers
+    - rapidjson
+    - fmt
+    - spdlog
   run:
     - python
     - boost
     - boost-cpp
     - zlib
+    - fmt
 
 test:
   imports:
