@@ -10,26 +10,26 @@ source:
     sha256: 50c0a766c3f0f4a4ba29ac1db8949ee352e0d7e4f2df819fb410f8a34e3ea051
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-  - url: https://github.com/fmtlib/fmt/archive/b6f4cea.tar.gz
-    sha256: de3061d275cb5c09c30dd809fcb425dce5bfd1dededcb272231263c95de05c61
-    folder: ext_libs/fmt
-  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
-    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
-    folder: ext_libs/rapidjson
-  - url: https://github.com/gabime/spdlog/archive/eb32206.tar.gz
-    sha256: c60cd3742d24c3f8014618ea7e54c7fa3d5fb3886cfd59281101e6f5058dfcc5
-    folder: ext_libs/spdlog
+#  - url: https://github.com/fmtlib/fmt/archive/b6f4cea.tar.gz
+#    sha256: de3061d275cb5c09c30dd809fcb425dce5bfd1dededcb272231263c95de05c61
+#    folder: ext_libs/fmt
+#  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
+#    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
+#    folder: ext_libs/rapidjson
+#  - url: https://github.com/gabime/spdlog/archive/eb32206.tar.gz
+#    sha256: c60cd3742d24c3f8014618ea7e54c7fa3d5fb3886cfd59281101e6f5058dfcc5
+#    folder: ext_libs/spdlog
 
 build:
   number: 0
   skip: true  # [win]
-  script:
-    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
+    - gnuconfig                              # [unix]
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - flatbuffers                            # [build_platform != target_platform]
     - cmake >=3.13
     - make
     - {{ compiler('c') }}
@@ -41,11 +41,16 @@ requirements:
     - boost-cpp
     - tox
     - zlib
+    - flatbuffers
+    - rapidjson
+    - fmt
+    - spdlog
   run:
     - python
     - boost
     - boost-cpp
     - zlib
+    - fmt
 
 test:
   imports:
