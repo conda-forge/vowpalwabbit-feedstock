@@ -10,37 +10,26 @@ source:
     sha256: 50c0a766c3f0f4a4ba29ac1db8949ee352e0d7e4f2df819fb410f8a34e3ea051
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-  - url: https://github.com/fmtlib/fmt/archive/b6f4cea.tar.gz
-    sha256: de3061d275cb5c09c30dd809fcb425dce5bfd1dededcb272231263c95de05c61
-    folder: ext_libs/fmt
-  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
-    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
-    folder: ext_libs/rapidjson
-  - url: https://github.com/gabime/spdlog/archive/eb32206.tar.gz
-    sha256: c60cd3742d24c3f8014618ea7e54c7fa3d5fb3886cfd59281101e6f5058dfcc5
-    folder: ext_libs/spdlog
+#  - url: https://github.com/fmtlib/fmt/archive/b6f4cea.tar.gz
+#    sha256: de3061d275cb5c09c30dd809fcb425dce5bfd1dededcb272231263c95de05c61
+#    folder: ext_libs/fmt
+#  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
+#    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
+#    folder: ext_libs/rapidjson
+#  - url: https://github.com/gabime/spdlog/archive/eb32206.tar.gz
+#    sha256: c60cd3742d24c3f8014618ea7e54c7fa3d5fb3886cfd59281101e6f5058dfcc5
+#    folder: ext_libs/spdlog
 
 build:
   number: 0
   skip: true  # [win]
-  script:
-    - set -xeuf
-    - EXT_NAME_DIRTY="$(python -m sysconfig | grep "EXT_SUFFIX =")"
-    - EXT_NAME_CLEAN=${EXT_NAME_DIRTY:15:200}
-    - EXT_NAME=${EXT_NAME_CLEAN%?}
-    - rm -rf build; mkdir build; cd build
-    - PYTHON_INC_PATH_EDIT=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")
-    - cmake .. -DRAPIDJSON_SYS_DEP=ON -DFMT_SYS_DEP=ON -DSPDLOG_SYS_DEP=ON -DBUILD_FLATBUFFERS=Off -DBUILD_PYTHON=On -DPY_VERSION="${CONDA_PY:0:1}.${CONDA_PY:1:2}" -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_TESTS=Off -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=$SP_DIR -DCMAKE_PREFIX_PATH=$CONDA_PREFIX -DBoost_NO_BOOST_CMAKE=ON -DVW_PYTHON_SHARED_LIB_SUFFIX=$EXT_NAME $CMAKE_ARGS -DPython_INCLUDE_DIR=$PYTHON_INC_PATH_EDIT
-    - cmake --build . -j{{ CPU_COUNT }}
-    - cmake --install .
-    - cd ..
-    - sed -i.bak '/\"build\_ext\"/d' setup.py
-    - {{ PYTHON }} setup.py install
 
 requirements:
   build:
+    - gnuconfig                              # [unix]
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - flatbuffers                            # [build_platform != target_platform]
     - cmake >=3.13
     - make
     - {{ compiler('c') }}
@@ -52,7 +41,7 @@ requirements:
     - boost-cpp
     - tox
     - zlib
-    # - flatbuffers
+    - flatbuffers
     - rapidjson
     - fmt
     - spdlog
