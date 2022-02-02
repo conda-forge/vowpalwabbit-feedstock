@@ -1,5 +1,8 @@
 #!/bin/env bash
 
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
+
 # get the proper ext_suffix:
 EXT_NAME_DIRTY="$(python -m sysconfig | grep "EXT_SUFFIX =")"
 EXT_NAME_CLEAN=${EXT_NAME_DIRTY:15:200}
@@ -13,9 +16,6 @@ rm -rf build; mkdir build; cd build
 
 # flatbuffers seems to cause a problem, not sure why?
 # need pyver with dot formatted
-
-# Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
 cmake .. \
           -DRAPIDJSON_SYS_DEP=ON \
