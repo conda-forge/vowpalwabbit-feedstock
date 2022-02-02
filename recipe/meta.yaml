@@ -1,6 +1,7 @@
 {% set name = "vowpalwabbit" %}
 {% set version = "9.0.1" %}
 
+
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -10,28 +11,37 @@ source:
     sha256: 50c0a766c3f0f4a4ba29ac1db8949ee352e0d7e4f2df819fb410f8a34e3ea051
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
+  - url: https://github.com/fmtlib/fmt/archive/835b910.tar.gz
+    sha256: e66881ef5089645dbb2105c8b6b7f7eebc6b82b67bc203186c2d67994897dca7
+    folder: ext_libs/fmt
+  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
+    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
+    folder: ext_libs/rapidjson
+  - url: https://github.com/gabime/spdlog/archive/de0dbfa.tar.gz
+    sha256: cdec95055813c8b7cebe9b417bb841ccca95c330d200ac32cc3b3561a305ad38
+    folder: ext_libs/spdlog
 
 build:
   number: 0
   skip: true  # [win]
   script:
-     - cp $BUILD_PREFIX/share/gnuconfig/config.* .
-     - export CMAKE_ARGS="$CMAKE_ARGS -DRAPIDJSON_SYS_DEP=On"
-     - export CMAKE_ARGS="$CMAKE_ARGS -DFMT_SYS_DEP=On"
-     - export CMAKE_ARGS="$CMAKE_ARGS -DSPDLOG_SYS_DEP=On"
-     - export CMAKE_ARGS="$CMAKE_ARGS -DBUILD_FLATBUFFERS=On"
-     - {{ PYTHON }} setup.py --cmake-options=$(echo $CMAKE_ARGS | sed 's/ /;/g') install
+    - {{ PYTHON }} -m pip install . -vv
+     # these symlink are needed because pypy expects a specific .so
+     # upstream hardcodes the .so extension
+     # see https://github.com/conda-forge/pypy-meta-feedstock/issues/21
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-x86_64-linux-gnu.so  # [python_impl == 'pypy' and (linux and x86_64)]
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-aarch64-linux-gnu.so  # [python_impl == 'pypy' and (linux and aarch64)]
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-ppc64le-linux-gnu.so  # [python_impl == 'pypy' and (linux and ppc64le)]
+#      - ln -s $SP_DIR/pylibvw.so $SP_DIR/pylibvw.pypy37-pp73-darwin.so  # [python_impl == 'pypy' and (osx and x86_64)]
+    - EXT_NAME_DIRTY="$(python -m sysconfig | grep "EXT_SUFFIX =")"
+    - EXT_NAME_CLEAN=${EXT_NAME_DIRTY:15:200}
+    - EXT_NAME=${EXT_NAME_CLEAN%?}
+    - ln -s ${SP_DIR}/pylibvw.so ${SP_DIR}/pylibvw${EXT_NAME}   # [python_impl == 'pypy']
 
 requirements:
   build:
-    - gnuconfig  # [unix]
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - flatbuffers                            # [build_platform != target_platform]
-    - rapidjson                              # [build_platform != target_platform]
-    - fmt                                    # [build_platform != target_platform]
-    - spdlog                                 # [build_platform != target_platform]
-    - zlib                                   # [build_platform != target_platform]
     - cmake >=3.13
     - make
     - {{ compiler('c') }}
@@ -43,16 +53,10 @@ requirements:
     - boost-cpp
     - tox
     - zlib
-    - flatbuffers
-    - rapidjson
-    - fmt
-    - spdlog
-
   run:
     - python
     - boost
     - boost-cpp
-    - fmt
     - zlib
 
 test:
