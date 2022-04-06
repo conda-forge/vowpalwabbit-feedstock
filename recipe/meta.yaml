@@ -10,6 +10,7 @@ source:
     sha256: 7bc826681872e5f38677b94f54159c3c7e4014d5f098a020c7068a0cb37c5c68
     patches:
       - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
+      - map_anonymous_undefined.diff  # [osx]
   - url: https://github.com/fmtlib/fmt/archive/b6f4cea.tar.gz
     sha256: de3061d275cb5c09c30dd809fcb425dce5bfd1dededcb272231263c95de05c61
     folder: ext_libs/fmt

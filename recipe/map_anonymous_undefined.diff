@@ -1,0 +1,13 @@
+diff --git a/vowpalwabbit/array_parameters.h b/vowpalwabbit/array_parameters.h
+index 3d007138a..aae356792 100644
+--- a/vowpalwabbit/array_parameters.h
++++ b/vowpalwabbit/array_parameters.h
+@@ -19,7 +19,7 @@
+ 
+ // It appears that on OSX MAP_ANONYMOUS is mapped to MAP_ANON
+ // https://github.com/leftmike/foment/issues/4
+-#ifdef __APPLE__
++#ifndef MAP_ANONYMOUS
+ #  define MAP_ANONYMOUS MAP_ANON
+ #endif
+ 
