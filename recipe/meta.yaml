@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.0.1" %}
+{% set version = "9.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -19,6 +19,9 @@ source:
   - url: https://github.com/gabime/spdlog/archive/eb32206.tar.gz
     sha256: c60cd3742d24c3f8014618ea7e54c7fa3d5fb3886cfd59281101e6f5058dfcc5
     folder: ext_libs/spdlog
+  - url: https://github.com/boostorg/math/archive/88c4b8d.tar.gz
+    sha256: d07fb5deacc06c3a7a481c628dfee6ce920ff31c0101e3eca96311969d6d96f5
+    folder: ext_libs/boost_math
 
 build:
   number: 0
