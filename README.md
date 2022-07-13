@@ -319,6 +319,5 @@ Feedstock Maintainers
 * [@gramhagen](https://github.com/gramhagen/)
 * [@jackgerrits](https://github.com/jackgerrits/)
 * [@ngam](https://github.com/ngam/)
-* [@peterychang](https://github.com/peterychang/)
 * [@xhochy](https://github.com/xhochy/)
 
