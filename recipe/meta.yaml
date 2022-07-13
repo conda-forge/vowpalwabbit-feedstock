@@ -8,6 +8,8 @@ package:
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
     sha256: d2d8fec8750abf0b379a52c92113fdd6719d827a26ed101c2f7b863ae95db1d1
+    patches:
+      - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
   - url: https://github.com/fmtlib/fmt/archive/b6f4cea.tar.gz
     sha256: de3061d275cb5c09c30dd809fcb425dce5bfd1dededcb272231263c95de05c61
     folder: ext_libs/fmt
