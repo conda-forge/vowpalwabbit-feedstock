@@ -9,18 +9,14 @@ source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
     sha256: d2d8fec8750abf0b379a52c92113fdd6719d827a26ed101c2f7b863ae95db1d1
     patches:
-      - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
+      - turn_off_sse2_flags.patch  # [osx and (build_platform != target_platform)]
+      - cmake_args.patch
 
 
 build:
   number: 0
   skip: true  # [win]
   script:
-    - export RAPIDJSON_SYS_DEP=ON
-    - export FMT_SYS_DEP=ON
-    - export SPDLOG_SYS_DEP=ON
-    - export VW_BOOST_MATH_SYS_DEP=ON
-    - export VW_ZLIB_SYS_DEP=ON
     - {{ PYTHON }} -m pip install . -vv
 
 requirements:
