@@ -1,5 +1,14 @@
+From 539bc82650a1d75ca7618ade28d2d1d0a9fa0a70 Mon Sep 17 00:00:00 2001
+From: ngam <67342040+ngam@users.noreply.github.com>
+Date: Wed, 13 Jul 2022 15:21:33 +0000
+Subject: [PATCH] turn off sse2 flags for osxarm64
+
+---
+ cmake/VWFlags.cmake | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
 diff --git a/cmake/VWFlags.cmake b/cmake/VWFlags.cmake
-index d533b5e5a..5924f81b5 100644
+index d533b5e5a7..5924f81b59 100644
 --- a/cmake/VWFlags.cmake
 +++ b/cmake/VWFlags.cmake
 @@ -12,9 +12,9 @@ if(LTO)
@@ -14,5 +23,4 @@ index d533b5e5a..5924f81b5 100644
 +# endif()
  
  # Add -ffast-math for speed, remove for testability.
- # no-stack-check is added to mitigate stack alignment issue on Catalina where there is a bug wi
-th aligning stack-check instructions, and stack-check became default option
+ # no-stack-check is added to mitigate stack alignment issue on Catalina where there is a bug with aligning stack-check instructions, and stack-check became default option
