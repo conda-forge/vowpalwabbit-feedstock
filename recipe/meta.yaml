@@ -42,6 +42,7 @@ requirements:
     - rapidjson
     - fmt
     - boost
+    - eigen
   run:
     - python
     - boost
@@ -51,6 +52,7 @@ requirements:
     - rapidjson
     - fmt
     - boost
+    - eigen
 
 test:
   imports:
