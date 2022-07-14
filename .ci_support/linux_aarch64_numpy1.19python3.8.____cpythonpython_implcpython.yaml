@@ -1,3 +1,5 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 boost:
 - 1.74.0
 boost_cpp:
@@ -6,8 +8,10 @@ c_compiler:
 - gcc
 c_compiler_version:
 - '10'
+cdt_arch:
+- aarch64
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -17,9 +21,11 @@ cxx_compiler:
 cxx_compiler_version:
 - '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-cos7-x86_64
+- quay.io/condaforge/linux-anvil-aarch64
 fmt:
 - '8'
+numpy:
+- '1.19'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
@@ -32,12 +38,17 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.8.* *_cpython
+python_impl:
+- cpython
 spdlog:
 - '1.10'
 target_platform:
-- linux-64
+- linux-aarch64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - numpy
+  - python_impl
 zlib:
 - '1.2'
