@@ -51,12 +51,20 @@ requirements:
     - eigen
 
 test:
+  source_files:
+    - python
   imports:
     - vowpalwabbit
   commands:
     - pip check
+    - python -m pytest python/tests/
   requires:
     - pip
+    - pytest
+    - pandas
+    - numpy
+    - scipy
+    - scikit-learn
 
 about:
   home: https://github.com/VowpalWabbit/vowpal_wabbit
