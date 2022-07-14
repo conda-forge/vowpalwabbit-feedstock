@@ -53,6 +53,7 @@ requirements:
 test:
   source_files:
     - python
+    - test
   imports:
     - vowpalwabbit
   commands:
