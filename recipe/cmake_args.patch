@@ -1,0 +1,25 @@
+From 5cab43a5e1f8145e49deefac6d4d2083514cf7c8 Mon Sep 17 00:00:00 2001
+From: ngam <67342040+ngam@users.noreply.github.com>
+Date: Wed, 13 Jul 2022 16:14:00 -0400
+Subject: [PATCH 2/2] use more cmake args
+
+---
+ setup.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/setup.py b/setup.py
+index c05b4ace3f..5f17ee6971 100644
+--- a/setup.py
++++ b/setup.py
+@@ -82,6 +82,11 @@ def build_cmake(self, ext):
+             "-DBUILD_PYTHON=On",
+             "-DBUILD_TESTING=Off",
+             "-DWARNINGS=Off",
++            "-DRAPIDJSON_SYS_DEP=On",
++            "-DFMT_SYS_DEP=On",
++            "-DSPDLOG_SYS_DEP=On",
++            "-DVW_BOOST_MATH_SYS_DEP=On",
++            "-DVW_ZLIB_SYS_DEP=On",
+         ]
+ 
+         # This doesn't work as expected for Python3.6 and 3.7 on Windows.

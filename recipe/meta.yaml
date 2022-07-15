@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.1.0" %}
+{% set version = "9.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,22 +7,11 @@ package:
 
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-    sha256: 7bc826681872e5f38677b94f54159c3c7e4014d5f098a020c7068a0cb37c5c68
+    sha256: d2d8fec8750abf0b379a52c92113fdd6719d827a26ed101c2f7b863ae95db1d1
     patches:
-      - turn_off_sse2_flags.diff  # [osx and (build_platform != target_platform)]
-      - map_anonymous_undefined.diff  # [osx]
-  - url: https://github.com/fmtlib/fmt/archive/b6f4cea.tar.gz
-    sha256: de3061d275cb5c09c30dd809fcb425dce5bfd1dededcb272231263c95de05c61
-    folder: ext_libs/fmt
-  - url: https://github.com/Tencent/rapidjson/archive/f54b0e4.tar.gz
-    sha256: 4a76453d36770c9628d7d175a2e9baccbfbd2169ced44f0cb72e86c5f5f2f7cd
-    folder: ext_libs/rapidjson
-  - url: https://github.com/gabime/spdlog/archive/eb32206.tar.gz
-    sha256: c60cd3742d24c3f8014618ea7e54c7fa3d5fb3886cfd59281101e6f5058dfcc5
-    folder: ext_libs/spdlog
-  - url: https://github.com/boostorg/math/archive/88c4b8d.tar.gz
-    sha256: d07fb5deacc06c3a7a481c628dfee6ce920ff31c0101e3eca96311969d6d96f5
-    folder: ext_libs/boost_math
+      - turn_off_sse2_flags.patch  # [osx and (build_platform != target_platform)]
+      - cmake_args.patch
+
 
 build:
   number: 0
@@ -45,19 +34,38 @@ requirements:
     - boost-cpp
     - tox
     - zlib
+    - spdlog
+    - rapidjson
+    - fmt
+    - boost
+    - eigen
   run:
     - python
     - boost
     - boost-cpp
     - zlib
+    - spdlog
+    - rapidjson
+    - fmt
+    - boost
+    - eigen
 
 test:
+  source_files:
+    - python
+    - test
   imports:
     - vowpalwabbit
   commands:
     - pip check
+    - python -m pytest python/tests/  # [python_impl == "cpython" and linux64]
   requires:
     - pip
+    - pytest
+    - pandas
+    - numpy
+    - scipy
+    - scikit-learn
 
 about:
   home: https://github.com/VowpalWabbit/vowpal_wabbit
@@ -69,6 +77,5 @@ extra:
   recipe-maintainers:
     - jackgerrits
     - gramhagen
-    - peterychang
     - xhochy
     - ngam
