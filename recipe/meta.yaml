@@ -58,7 +58,7 @@ test:
     - vowpalwabbit
   commands:
     - pip check
-    - python -m pytest python/tests/  # [python_impl == "cpython"]
+    - python -m pytest python/tests/  # [python_impl == "cpython" and linux64]
   requires:
     - pip
     - pytest
