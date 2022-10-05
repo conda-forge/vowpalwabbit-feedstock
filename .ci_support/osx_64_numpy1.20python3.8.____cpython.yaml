@@ -21,7 +21,7 @@ fmt:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
-- '1.19'
+- '1.20'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
@@ -30,10 +30,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  zlib:
-    max_pin: x.x
 python:
-- 3.7.* *_cpython
+- 3.8.* *_cpython
 python_impl:
 - cpython
 spdlog:
