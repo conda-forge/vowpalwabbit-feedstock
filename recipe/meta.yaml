@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-    sha256: 2c7b3df2571c3e3b9be460cf077771b64398083c6b8b4e02569492b32a5ae312
+    sha256: dfbbd278472e5e4d61f50d6ab8a2147ee447db2451942d8a4689d1f3bf6e6e1f
     patches:
       - turn_off_sse2_flags.patch  # [osx and (build_platform != target_platform)]
       - cmake_args.patch
@@ -79,3 +79,4 @@ extra:
     - gramhagen
     - xhochy
     - ngam
+    - byronxu99
