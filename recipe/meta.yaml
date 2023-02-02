@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.6.0" %}
+{% set version = "9.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-    sha256: dfbbd278472e5e4d61f50d6ab8a2147ee447db2451942d8a4689d1f3bf6e6e1f
+    sha256: 1a368920023a4a55af91f6ac83f3cf590025f497ec234d24185e9d195d09290e
     patches:
       - turn_off_sse2_flags.patch  # [osx and (build_platform != target_platform)]
       - cmake_args.patch
