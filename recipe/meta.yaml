@@ -39,6 +39,7 @@ requirements:
     - fmt
     - boost
     - eigen
+    - sse2neon  # [arm64 or aarch64 or ppc64le]
   run:
     - python
     - boost
