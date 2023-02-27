@@ -1,0 +1,41 @@
+From 1efa718123bf53c9f8d9120c5323424b93a608a3 Mon Sep 17 00:00:00 2001
+From: "Uwe L. Korn" <uwe.korn@quantco.com>
+Date: Wed, 22 Feb 2023 21:54:22 +0100
+Subject: [PATCH] Disable compiling for sse2 on osx-arm64
+
+---
+ cmake/VWFlags.cmake | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/cmake/VWFlags.cmake b/cmake/VWFlags.cmake
+index f50dd26..7bf431e 100644
+--- a/cmake/VWFlags.cmake
++++ b/cmake/VWFlags.cmake
+@@ -12,15 +12,15 @@ if(LTO)
+   set(VW_LINUX_FLAGS ${VW_LINUX_FLAGS} -flto=thin)
+ endif()
+ 
+-if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
+-  if(NOT "arm64" STREQUAL "${CMAKE_OSX_ARCHITECTURES}")
+-    # Use sse2 by default. Change to latest simd extensions such as avx512 on supported architecture.
+-    set(LINUX_X86_64_OPT_FLAGS -msse2 -mfpmath=sse)
+-    if(UNIX AND NOT APPLE)
+-      set(LINUX_X86_64_OPT_FLAGS ${LINUX_X86_64_OPT_FLAGS} -mavx2)
+-    endif()
+-  endif()
+-endif()
++#if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
++#  if(NOT "arm64" STREQUAL "${CMAKE_OSX_ARCHITECTURES}")
++#    # Use sse2 by default. Change to latest simd extensions such as avx512 on supported architecture.
++#    set(LINUX_X86_64_OPT_FLAGS -msse2 -mfpmath=sse)
++#    if(UNIX AND NOT APPLE)
++#      set(LINUX_X86_64_OPT_FLAGS ${LINUX_X86_64_OPT_FLAGS} -mavx2)
++#    endif()
++#  endif()
++#endif()
+ 
+ # Add -ffast-math for speed, remove for testability.
+ # no-stack-check is added to mitigate stack alignment issue on Catalina where there is a bug with aligning stack-check instructions, and stack-check became default option
+-- 
+2.37.1 (Apple Git-137.1)
+
