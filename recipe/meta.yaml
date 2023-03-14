@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-    sha256: cfc7d43fc590dffebf0adb385560dd72735f23b9086c918e95475b341c620a9d
-    patches:
-      - 0001-Disable-compiling-for-sse2-on-osx-arm64.patch  # [osx and arm64]
-      - cmake_args.patch
+  url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
+  sha256: cfc7d43fc590dffebf0adb385560dd72735f23b9086c918e95475b341c620a9d
+  patches:
+    - cmake_args.patch
+    - 0001-Apply-CMAKE_ARGS-if-set.patch
 
 
 build:
