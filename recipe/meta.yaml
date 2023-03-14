@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.7.0" %}
+{% set version = "9.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-    sha256: 213a9386f35aa958475fa9fc54785353a8180623442eef2876867463efcfefe8
+    sha256: cfc7d43fc590dffebf0adb385560dd72735f23b9086c918e95475b341c620a9d
     patches:
       - 0001-Disable-compiling-for-sse2-on-osx-arm64.patch  # [osx and arm64]
       - cmake_args.patch
