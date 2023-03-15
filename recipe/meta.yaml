@@ -67,6 +67,7 @@ test:
     - numpy
     - scipy
     - scikit-learn
+    - vw-executor  # [linux]
 
 about:
   home: https://github.com/VowpalWabbit/vowpal_wabbit
