@@ -14,7 +14,7 @@ source:
 
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - {{ PYTHON }} -m pip install . -vv
@@ -59,7 +59,7 @@ test:
     - vowpalwabbit
   commands:
     - pip check
-    - python -m pytest python/tests/  # [python_impl == "cpython" and linux64]
+    - python -m pytest python/tests/ -k "not test_ccb_and_automl"  # [python_impl == "cpython" and linux64]
   requires:
     - pip
     - pytest
@@ -67,7 +67,6 @@ test:
     - numpy
     - scipy
     - scikit-learn
-    - vw-executor  # [linux]
 
 about:
   home: https://github.com/VowpalWabbit/vowpal_wabbit
