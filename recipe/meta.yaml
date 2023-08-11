@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.8.0" %}
+{% set version = "9.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-  sha256: cfc7d43fc590dffebf0adb385560dd72735f23b9086c918e95475b341c620a9d
+  sha256: 46d206c5b2336ed0c9dc228d34457db4acd9e3ade8b509f8fb426183651984c1
   patches:
     - cmake_args.patch
     - 0001-Apply-CMAKE_ARGS-if-set.patch
 
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   script:
     - {{ PYTHON }} -m pip install . -vv
