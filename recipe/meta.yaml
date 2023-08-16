@@ -9,8 +9,8 @@ source:
   url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
   sha256: 46d206c5b2336ed0c9dc228d34457db4acd9e3ade8b509f8fb426183651984c1
   patches:
-    - cmake_args.patch
-    - 0001-Apply-CMAKE_ARGS-if-set.patch
+    - 0001-Use-system-dependencies.patch
+    - 0002-Apply-CMAKE_ARGS-if-set.patch
 
 
 build:
@@ -39,6 +39,7 @@ requirements:
     - fmt
     - boost
     - eigen
+    - armadillo
     - sse2neon  # [arm64 or aarch64 or ppc64le]
   run:
     - python
