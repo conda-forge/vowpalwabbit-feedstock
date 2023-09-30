@@ -14,7 +14,7 @@ source:
 
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   script:
     - {{ PYTHON }} -m pip install . -vv
@@ -30,27 +30,26 @@ requirements:
   host:
     - pip
     - python
-    - boost
-    - boost-cpp
+    - libboost-python-devel
+    - libboost-devel
     - tox
     - zlib
     - spdlog
     - rapidjson
     - fmt
-    - boost
+    - libboost-python-devel
     - eigen
     - armadillo
     - ensmallen
     - sse2neon  # [arm64 or aarch64 or ppc64le]
   run:
     - python
-    - boost
-    - boost-cpp
+    - libboost-python-devel
     - zlib
     - spdlog
     - rapidjson
     - fmt
-    - boost
+    - libboost-python-devel
     - eigen
 
 test:
