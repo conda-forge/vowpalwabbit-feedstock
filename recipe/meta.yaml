@@ -37,19 +37,16 @@ requirements:
     - spdlog
     - rapidjson
     - fmt
-    - libboost-python-devel
     - eigen
     - armadillo
     - ensmallen
     - sse2neon  # [arm64 or aarch64 or ppc64le]
   run:
     - python
-    - libboost-python-devel
     - zlib
     - spdlog
     - rapidjson
     - fmt
-    - libboost-python-devel
     - eigen
 
 test:
