@@ -14,7 +14,7 @@ source:
 
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   script:
     - {{ PYTHON }} -m pip install . -vv
@@ -26,6 +26,7 @@ requirements:
     - cmake >=3.13
     - make
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - pip
