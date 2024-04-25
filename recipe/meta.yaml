@@ -14,7 +14,7 @@ source:
 
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   script:
     - {{ PYTHON }} -m pip install . -vv
