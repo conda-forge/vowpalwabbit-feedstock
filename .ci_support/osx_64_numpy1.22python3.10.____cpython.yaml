@@ -35,14 +35,12 @@ python:
 python_impl:
 - cpython
 spdlog:
-- '1.12'
+- '1.13'
 target_platform:
 - osx-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - c_stdlib_version
-  - MACOSX_DEPLOYMENT_TARGET
 - - python
   - numpy
   - python_impl
