@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
 c_compiler:
 - clang
 c_compiler_version:
@@ -35,7 +37,7 @@ python:
 python_impl:
 - cpython
 spdlog:
-- '1.13'
+- '1.14'
 target_platform:
 - osx-arm64
 zip_keys:
@@ -45,4 +47,4 @@ zip_keys:
   - numpy
   - python_impl
 zlib:
-- '1.2'
+- '1'
