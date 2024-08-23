@@ -23,7 +23,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-aarch64
 fmt:
-- '10'
+- '11'
 libboost_devel:
 - '1.84'
 libboost_python_devel:
