@@ -31,6 +31,7 @@ requirements:
   host:
     - pip
     - python
+    - setuptools
     - libboost-python-devel
     - libboost-devel
     - tox
