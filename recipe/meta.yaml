@@ -59,7 +59,7 @@ test:
     - vowpalwabbit
   commands:
     - pip check
-    - python -m pytest python/tests/ -k "not test_ccb_and_automl"  # [python_impl == "cpython" and linux64]
+    - python -m pytest -sv python/tests/ -k "not test_ccb_and_automl"  # [python_impl == "cpython" and linux64]
   requires:
     - pip
     - pytest
