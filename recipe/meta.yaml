@@ -14,7 +14,7 @@ source:
 
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   script:
     - {{ PYTHON }} -m pip install . -vv
@@ -31,6 +31,7 @@ requirements:
   host:
     - pip
     - python
+    - setuptools
     - libboost-python-devel
     - libboost-devel
     - tox
@@ -58,7 +59,7 @@ test:
     - vowpalwabbit
   commands:
     - pip check
-    - python -m pytest python/tests/ -k "not test_ccb_and_automl"  # [python_impl == "cpython" and linux64]
+    - python -m pytest -sv python/tests/ -k "not test_ccb_and_automl"  # [python_impl == "cpython" and linux64]
   requires:
     - pip
     - pytest
