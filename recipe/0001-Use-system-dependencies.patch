@@ -4,14 +4,14 @@ Date: Fri, 7 Mar 2026 00:00:00 +0000
 Subject: [PATCH] Use system dependencies
 
 ---
- setup.py | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ setup.py | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/setup.py b/setup.py
 index 1234567..abcdefg 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -120,6 +120,15 @@ class BuildPyLibVWBindingsModule(_build_ext):
+@@ -120,6 +120,14 @@ class BuildPyLibVWBindingsModule(_build_ext):
              "-DVW_FEAT_CB_GRAPH_FEEDBACK=On",
              "-DVW_SIMD_INV_SQRT=Off",  # Use std::sqrt for reproducible results
          ]
@@ -22,7 +22,6 @@ index 1234567..abcdefg 100644
 +            "-DVW_ZLIB_SYS_DEP=On",
 +            "-DVW_EIGEN_SYS_DEP=On",
 +            "-DRAPIDJSON_SYS_DEP=On",
-+            "-DVW_STRING_VIEW_LITE_SYS_DEP=On",
 +        ]
 
          # This doesn't work as expected for Python3.6 and 3.7 on Windows.

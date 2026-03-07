@@ -38,7 +38,6 @@ requirements:
     - rapidjson
     - fmt
     - eigen
-    - string-view-lite
     - armadillo
     - ensmallen
     - sse2neon  # [arm64 or aarch64 or ppc64le]
