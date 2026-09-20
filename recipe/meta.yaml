@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.10.0" %}
+{% set version = "9.11.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 9f4ec5cddf67af2c7aa9b380b23fe22c4b11e2109f2cbaa1314bdf3570749a4d
+  sha256: 7b32f93f662435e4e6b3b63ad0a0e4232d6531aba0bd7a51b9421c0c43983ba0
   patches:
     - 0001-Use-system-dependencies.patch
     - 0002-Apply-CMAKE_ARGS-if-set.patch
 
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   script:
     - {{ PYTHON }} -m pip install . -vv
