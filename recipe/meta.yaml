@@ -1,5 +1,5 @@
 {% set name = "vowpalwabbit" %}
-{% set version = "9.11.7" %}
+{% set version = "9.11.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/VowpalWabbit/vowpal_wabbit/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 828c94afc960dee230110b08c6b37eb17ab117dad9214b57ab7c10330f064670
+  sha256: d45593dd0c2a6fbc39dfe1754ac23c27cb93b972e363fd756c54db05c50f613c
   patches:
     - 0001-Use-system-dependencies.patch
 
